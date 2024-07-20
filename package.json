@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  },
+  "name": "gerenciador-de-contas-bancarias",
+  "version": "1.0.0",
+  "description": "Esse projeto em pt-br tem como função simular um gerenciador básico de contas bancárias que podem ser criadas e manipuladas pelo usuário que o executar",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "André Lucas",
+  "license": "ISC"
+}
