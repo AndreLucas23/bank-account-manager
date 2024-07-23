@@ -72,6 +72,28 @@ function exibirOpcoesPorConta(tipoConta) {
     return +prompt('Digite um número de opção: ')
 }
 
+// Criação da função simples que informa ao usuário que um erro ocorreu na inserção de um número para um menu de opções
+function exibirErro() {
+    console.log()
+    console.warn('Por favor, digite um valor válido')
+}
+
+// Criação da função que verifica se o valor a ser
+// sacado ou depositado não é nulo ou negativo
+function verificarValor(valor) {
+    if (valor <= 0) {
+        return false
+    }
+    return true
+}
+
+function verificarSaque(valor, conta) {
+    if (valor > conta.saldo) {
+        return false;
+    }
+    return true;
+}
+
 // Criação da função que recebe a recebe um número do usuário para a escolha da opção já exibida por um menu
 // É uma função que suporta qualquer tipo de conta
 function processarComandoConta(conta, tipoConta) {
@@ -95,13 +117,16 @@ function processarComandoConta(conta, tipoConta) {
     } else if (comandoConta === 2 && checarSenha(senha)) {
         valorASacar = +prompt('Digite o valor a ser sacado da conta: R$').replace(',','.');
 
-        if (verificarValor(valorASacar)) {
-            console.log();
-            console.log('O valor foi sacado da sua conta!');
-        } else {
+        if (!verificarValor(valorASacar)) {
             console.log();
             console.warn('Não é possível sacar valores nulos ou negativos');
+        } else if (!verificarSaque(valorASacar, conta)) {
+            console.log();
+            console.warn('Não é possível sacar valores maiores que o saldo atual');
+        } else {
+            conta.sacar(valorASacar)
         }
+
     // O input "3" exibe o saldo da conta atual no console
     } else if (comandoConta === 3 && checarSenha(senha)) {
         console.log();
@@ -121,21 +146,6 @@ function processarComandoConta(conta, tipoConta) {
     } else {
         exibirErro();
     }
-}
-
-// Criação da função simples que informa ao usuário que um erro ocorreu na inserção de um número para um menu de opções
-function exibirErro() {
-    console.log()
-    console.warn('Por favor, digite um valor válido')
-}
-
-// Criação da função que verifica se o valor a ser
-// sacado ou depositado não é nulo ou negativo
-function verificarValor(valor) {
-    if (valor <= 0) {
-        return false
-    }
-    return true
 }
 
 // Declaração das variáveis globais próprias do usuário
